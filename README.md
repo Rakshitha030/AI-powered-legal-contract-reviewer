@@ -64,12 +64,11 @@ flowchart TD
     B --> C[Preprocessing - Cleaning, Language Detection, Tokenizing]
     C --> D1[Summarization - T5-small]
     C --> D2[Key Points Extraction - Sentence Embeddings]
-    C --> D3[Suggestions Generator - Rule-based + NLP]
+    C --> D3[Suggestions Generator - Rule-based ]
     C --> D4[Q&A System - DistilBERT]
     D1 --> E[Results Display - Summary, Keypoints, Suggestions, Q&A]
     D2 --> E
     D3 --> E
     D4 --> E
-    E --> F[Suggestion Box - User Feedback Store]
 '''
 
