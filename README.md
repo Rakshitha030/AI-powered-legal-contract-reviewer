@@ -16,11 +16,17 @@ This project is an AI-powered legal document assistant that can:
 
 ✨ Features
 ✅ Multi-format Support → PDF, DOCX, TXT, PNG/JPG (OCR via Tesseract/EasyOCR)
+
 ✅ Hybrid Summarization → Uses embeddings + abstractive summarization (T5-small)
+
 ✅ Key Sentence Extraction → Finds the most important sentences using sentence-transformers
+
 ✅ Legal Suggestions → Detects missing clauses, weak obligations, unclear deadlines
+
 ✅ Question Answering → Ask contract-specific questions (DistilBERT QA model)
+
 ✅ Language Detection → Auto-detects document language (if supported)
+
 ✅ User-Friendly UI → Gradio-based interface
 
 🛠️ Tech Stack
@@ -38,19 +44,19 @@ Embeddings → paraphrase-MiniLM-L3-v2
 
  ⚖️ Workflow Diagram
 
+## ⚖️ Workflow Diagram
+
 ```mermaid
 flowchart TD
-    A[Document Upload<br>(PDF, DOCX, TXT, Image via OCR)] --> B[Text Extraction<br>(pdfplumber, docx, pytesseract, easyOCR)]
-    B --> C[Preprocessing<br>(Cleaning, Language Detection, Tokenizing)]
-    C --> D[AI Processing]
-
-    subgraph D [AI Processing]
-        D1[Summarization<br>(T5-small)]
-        D2[Key Points Extraction<br>(Sentence Embeddings)]
-        D3[Suggestions Generator<br>(Rule-based + NLP)]
-        D4[Q&A System<br>(DistilBERT)]
-    end
-
-    D --> E[Results Display<br>(Summary, Keypoints, Suggestions, Q&A)]
-    E --> F[Suggestion Box<br>(User Feedback Store)]
+    A[Document Upload (PDF, DOCX, TXT, Image via OCR)] --> B[Text Extraction (pdfplumber, docx, pytesseract, easyOCR)]
+    B --> C[Preprocessing (Cleaning, Language Detection, Tokenizing)]
+    C --> D1[Summarization (T5-small)]
+    C --> D2[Key Points Extraction (Sentence Embeddings)]
+    C --> D3[Suggestions Generator (Rule-based + NLP)]
+    C --> D4[Q&A System (DistilBERT)]
+    D1 --> E[Results Display (Summary, Keypoints, Suggestions, Q&A)]
+    D2 --> E
+    D3 --> E
+    D4 --> E
+    E --> F[Suggestion Box (User Feedback Store)]
 
