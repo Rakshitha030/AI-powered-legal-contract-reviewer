@@ -32,15 +32,25 @@ This project is an AI-powered legal document assistant that can:
 ✅ User-Friendly UI → Gradio-based interface
 
 ## 🛠️ Tech Stack
+
 Backend / Core: Python
+
 Libraries:
+
 pdfplumber, python-docx, PIL, pytesseract, easyocr (OCR & document parsing)
+
 transformers, sentence-transformers (summarization, embeddings, Q&A)
+
 langdetect (language detection)
+
 gradio (interactive web app)
+
 Models:
+
 Summarization → t5-small
+
 Q&A → distilbert-base-uncased-distilled-squad
+
 Embeddings → paraphrase-MiniLM-L3-v2
 
 
@@ -50,7 +60,7 @@ Embeddings → paraphrase-MiniLM-L3-v2
 
 ```mermaid
 flowchart TD
-    A[Document Upload - PDF, DOCX, TXT, Image via OCR] --> B[Text Extraction - pdfplumber, docx, pytesseract, easyOCR]
+    A[Document Upload - PDF, DOCX, TXT, Image ] --> B[Text Extraction - pdfplumber, docx, pytesseract, easyOCR]
     B --> C[Preprocessing - Cleaning, Language Detection, Tokenizing]
     C --> D1[Summarization - T5-small]
     C --> D2[Key Points Extraction - Sentence Embeddings]
