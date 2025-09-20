@@ -14,7 +14,9 @@ This project is an AI-powered legal document assistant that can:
 
 🖥️ Interactive Gradio UI for easy usage
 
-✨ Features
+
+## ✨ Features
+
 ✅ Multi-format Support → PDF, DOCX, TXT, PNG/JPG (OCR via Tesseract/EasyOCR)
 
 ✅ Hybrid Summarization → Uses embeddings + abstractive summarization (T5-small)
@@ -29,7 +31,7 @@ This project is an AI-powered legal document assistant that can:
 
 ✅ User-Friendly UI → Gradio-based interface
 
-🛠️ Tech Stack
+## 🛠️ Tech Stack
 Backend / Core: Python
 Libraries:
 pdfplumber, python-docx, PIL, pytesseract, easyocr (OCR & document parsing)
@@ -42,7 +44,7 @@ Q&A → distilbert-base-uncased-distilled-squad
 Embeddings → paraphrase-MiniLM-L3-v2
 
 
- ⚖️ Workflow Diagram
+
 
 ## ⚖️ Workflow Diagram
 
