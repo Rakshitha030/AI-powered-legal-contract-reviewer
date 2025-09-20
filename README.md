@@ -46,8 +46,6 @@ Embeddings → paraphrase-MiniLM-L3-v2
 
 ## ⚖️ Workflow Diagram
 
-## ⚖️ Workflow Diagram
-
 ```mermaid
 flowchart TD
     A[Document Upload - PDF, DOCX, TXT, Image via OCR] --> B[Text Extraction - pdfplumber, docx, pytesseract, easyOCR]
