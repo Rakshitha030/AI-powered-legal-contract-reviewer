@@ -24,9 +24,7 @@ try:
 except Exception:
     _HAS_LANGDETECT = False
 
-# ---------------------------
 # Configuration / Model names
-# ---------------------------
 EMBEDDING_MODEL = "sentence-transformers/paraphrase-MiniLM-L3-v2"   # tiny
 SUMMARIZER_MODEL = "t5-small"
 QA_MODEL = "distilbert-base-uncased-distilled-squad"
@@ -36,15 +34,11 @@ SIMILARITY_THRESHOLD_ANNOTATE = 0.62
 SIMILARITY_THRESHOLD_SELECT = 0.52
 MAX_CHUNK_WORDS = 300
 
-# ---------------------------
 # Device / Memory config
-# ---------------------------
 device = 0 if torch.cuda.is_available() else -1
 dtype = torch.float16 if torch.cuda.is_available() else torch.float32
 
-# ---------------------------
-# Load models
-# ---------------------------
+# Load models-
 print("Loading embedding model...")
 embed_model = SentenceTransformer(EMBEDDING_MODEL, device='cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -74,9 +68,7 @@ qa_pipeline = pipeline(
     device=device,
 )
 
-# ---------------------------
 # OCR helpers
-# ---------------------------
 def ocr_image_pytesseract(image_path: str, lang: str = "eng") -> str:
     return pytesseract.image_to_string(Image.open(image_path), lang=lang)
 
@@ -87,9 +79,7 @@ def ocr_image_easyocr(image_path: str, langs=None) -> str:
     results = reader.readtext(image_path, detail=0)
     return "\n".join(results)
 
-# ---------------------------
 # Document loading
-# ---------------------------
 def load_document(file_obj) -> Tuple[str, str]:
     path = getattr(file_obj, "name", None) or getattr(file_obj, "temp_path", None)
     if not path:
@@ -121,9 +111,7 @@ def load_document(file_obj) -> Tuple[str, str]:
     else:
         raise ValueError("Unsupported file type.")
 
-# ---------------------------
 # Text utils
-# ---------------------------
 def simple_sent_tokenize(text: str) -> List[str]:
     text = re.sub(r'\s+', ' ', text.replace("\n", " ").strip())
     parts = re.split(r'(?<=[.!?])\s+', text)
@@ -144,9 +132,7 @@ def chunk_sentences_by_wordcount(sentences: List[str], max_words: int) -> List[s
         chunks.append(" ".join(curr))
     return chunks
 
-# ---------------------------
 # Core summarization
-# ---------------------------
 def extract_key_sentences(text: str, top_k: int = 8) -> List[Tuple[str, float]]:
     if not text.strip():
         return []
@@ -174,9 +160,7 @@ def hybrid_summarize(text: str, max_summary_words: int = 120) -> str:
             summaries.append(chunk)
     return " ".join(summaries).strip()
 
-# ---------------------------
 # Annotation & QA
-# ---------------------------
 def annotate_text(text: str, summary: str) -> Tuple[str, List[str]]:
     sentences = simple_sent_tokenize(text)
     if not sentences:
@@ -206,9 +190,7 @@ def answer_question(question: str, context: str) -> str:
     except Exception as e:
         return f"[QA Error] {e}"
 
-# ---------------------------
 # Suggestions
-# ---------------------------
 SUGGESTION_RULES = [
     (r"\b(may|could|might|should)\b", "Consider replacing weak modal verbs with clearer obligations."),
     (r"\b(payment|amount|fee|rupees|\$|\€|\£)\b", "Ensure currency and payment schedule are clear."),
@@ -232,9 +214,7 @@ def lint_suggestions(text: str) -> List[str]:
         suggestions.append(f"{len(long_sentences)} very long sentence(s) detected.")
     return list(dict.fromkeys(suggestions))
 
-# ---------------------------
 # Full pipeline
-# ---------------------------
 def process_document_file(file_obj):
     try:
         raw_text, source = load_document(file_obj)
@@ -272,12 +252,7 @@ def process_document_file(file_obj):
         "suggestions": suggestions,
     }
 
-# ---------------------------
 # Gradio UI
-# ---------------------------
-# ---------------------------
-# Gradio UI
-# ---------------------------
 def gr_process_file(file_obj):
     text, ftype = load_document(file_obj)
     summary = hybrid_summarize(text)
@@ -337,3 +312,4 @@ with gr.Blocks(title="AI Legal Contract Reviewer") as demo:
 
 if __name__ == "__main__":
     demo.launch(share=True)
+
