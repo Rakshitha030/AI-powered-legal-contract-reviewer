@@ -1,0 +1,40 @@
+name: Run Code and Save Output
+
+# Trigger manually
+on:
+  workflow_dispatch:
+
+jobs:
+  run-and-save:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Checkout the repository
+    - name: Checkout Repo
+      uses: actions/checkout@v3
+
+    # 2. Set up Python
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    # 3. Install dependencies if requirements.txt exists
+    - name: Install Dependencies
+      run: |
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+    # 4. Run the script and save output
+    - name: Run Script
+      run: |
+        python main.py > output.txt
+
+    # 5. Commit the output file back to GitHub
+    - name: Commit Output
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add output.txt
+        git commit -m "Add output from GitHub Actions" || echo "No changes to commit"
+        git push
+
