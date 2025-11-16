@@ -12,7 +12,6 @@ This project is an AI-powered legal document assistant that can:
 
 ❓ Answer questions about the contract (Q&A system)
 
-🖥️ Interactive Gradio UI for easy usage
 
 
 ## ✨ Features
@@ -43,7 +42,6 @@ transformers, sentence-transformers (summarization, embeddings, Q&A)
 
 langdetect (language detection)
 
-gradio (interactive web app)
 
 Models:
 
